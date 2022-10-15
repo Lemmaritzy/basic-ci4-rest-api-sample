@@ -50,7 +50,7 @@ class Book extends Model
         $query = $this->db->query("SELECT * FROM books");
         return $query->getResultArray();
     }
-    
+
     public function insertBook($data)
     {
 
@@ -85,5 +85,13 @@ class Book extends Model
             'id' => trim($data['id'], ' ')
         ]);
         return $query;
+    }
+
+    public function findBook($data)
+    {
+        $query = $this->db->query('SELECT * FROM ' . $this->table . ' where id= :id:', [
+            'id' => trim($data['id'])
+        ]);
+        return $query->getResultArray();
     }
 }

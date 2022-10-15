@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Book as bookModel;
 
-class testing extends BaseController
+class Books extends BaseController
 {
     private $books;
 
@@ -80,7 +80,7 @@ class testing extends BaseController
             'id' => $this->request->getVar('id'),
         ];
         $validate = $this->books->validate($data);
-       
+
         if ($validate) {
             $stmt = $this->books->updateBook($data);
         } else {
@@ -94,6 +94,40 @@ class testing extends BaseController
             $status = ['message' => $errors];
         }
 
+        echo json_encode($status);
+    }
+
+    public function findBook()
+    {
+        $data["id"] = $this->request->getVar('id');
+
+
+        $validate = $this->books->validate($data);
+
+        if ($validate) {
+            $stmt = $this->books->findBook($data);
+        } else {
+            $errors = $this->books->errors();
+        }
+
+        if (!isset($errors)) {
+            if ($stmt) {
+                $status = [
+                    'message' => 'Aranan kitap bulundu',
+                    'result' => $stmt
+                ];
+            } else {
+                $status = [
+                    'message' => 'Aranan kitap bulunamadi',
+
+                ];
+            }
+        } else {
+            $status = [
+                'message' => 'hata var adamim  ',
+                'result' => $errors
+            ];
+        }
         echo json_encode($status);
     }
 }

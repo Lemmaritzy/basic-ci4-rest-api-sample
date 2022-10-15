@@ -39,10 +39,11 @@ $routes->get('/', 'Home::index');
 
 
 $routes->group('books', function ($routes) {
-    $routes->get('/', 'testing::index');
-    $routes->post('save', 'testing::insertBook');
-    $routes->post('delete', 'testing::deleteBook');
-    $routes->post('update','testing::updateBook');
+    $routes->get('/', 'Books::index');
+    $routes->post('save', 'Books::insertBook');
+    $routes->post('delete', 'Books::deleteBook');
+    $routes->post('update', 'Books::updateBook');
+    $routes->post('find', 'Books::findBook');
 });
 
 /*
